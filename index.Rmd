@@ -11,4 +11,16 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to I am interested in exploring data related to the social status and demographic composition of supporters of the two major political parties in the United States.
+The data source I used to complete my Final Project is the General Social Survey (GSS) – a nationally representative survey of all adult Americans which assesses their views about politics, demographics and economics over time. My research question is: Is economic insecurity an indicator of the likelihood of being identified as conservative ideologically in the United States? Based upon economic anxiety and threat response theory I hypothesize that those who report experiencing, or believe they are experiencing economic insecurity, will have a greater tendency to identify themselves as conservative ideologically. A possible behavioral cause for this may be that economic uncertainty leads to a preference for social order, stability and traditional institutions; all characteristics typically associated with conservative ideologies. My key independent variable is economic insecurity which was measured through survey questions such as respondents' reported level of satisfaction regarding their finances or whether or not respondents believed that the nation's economic situation is improving or deteriorating. This allows for variation across each respondent thereby permitting regression analysis. My dependent variable is respondents' ideological self-identification which is measured by respondents' placement on the GSS liberal-conservative scale (which generally ranges from extremely liberal to extremely conservative). If support for my hypothesis is found in a regression model where high levels of economic insecurity are related to high (i.e. more conservative) placements on the ideology scale, then this will confirm my hypothesis. Conversely, if there is a significant relationship between economic insecurity and liberal ideological identity or if there is no statistically significant relationship between economic insecurity and ideological identity — either liberal or conservative — then this will disconfirm my hypothesis.
+
+```{r}
+library(tidyverse)
+library(haven)
+```
+
+
+```{r}
+gss <- read_sav("data/GSS2024.sav")
+head(gss)
+```
+
