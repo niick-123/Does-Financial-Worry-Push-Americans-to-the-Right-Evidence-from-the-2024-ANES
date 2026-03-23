@@ -40,7 +40,7 @@ plot_data <- proj_data |>
     n = n()
   )
 
-line_graph <- ggplot(plot_data, aes(x = fin_worry_rev, y = mean_ideology)) +
+ggplot(plot_data, aes(x = fin_worry_rev, y = mean_ideology)) +
   geom_point(size = 3) +
   geom_line() +
   scale_x_continuous(
@@ -58,7 +58,5 @@ line_graph <- ggplot(plot_data, aes(x = fin_worry_rev, y = mean_ideology)) +
     x = "Current financial worry",
     y = "Average ideology (higher = more conservative)"
   )
-
-line_graph
 ```
 
