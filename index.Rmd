@@ -71,3 +71,6 @@ colnames(reg_table) <- c("Estimate", "Std. Error", "t value", "p value")
 knitr::kable(reg_table, digits = 3)
 ```
 Table 1 reports the results of a regression of ideological self-placement on financial worry. The coefficient on financial worry is 0.152, meaning that a one-unit increase in financial worry is associated with about a 0.15-point increase on the seven-point ideology scale, where higher values indicate greater conservatism. This relationship is statistically significant(p<0.001), suggesting that respondents who are more worried about their financial situation tend to identify as somewhat more conservative. At the same time, the model explains only a small share of the variation in ideology(R2=0.011), so the relationship appears to be real but modest in size.
+
+
+Overall, both the visualization and the regression suggest that financial worry is positively associated with conservative ideological self-placement in the 2024 ANES data.
