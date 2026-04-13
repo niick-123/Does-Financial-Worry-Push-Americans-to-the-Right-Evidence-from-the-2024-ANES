@@ -37,6 +37,7 @@ plot_data <- proj_data |>
   group_by(fin_worry_rev) |>
   summarize(
     mean_ideology = mean(ideology),
+    se = sd(ideology),
     n = n()
   )
 
@@ -59,4 +60,14 @@ ggplot(plot_data, aes(x = fin_worry_rev, y = mean_ideology)) +
     y = "Average Ideology (Higher = More Conservative)"
   )
 ```
+The graph in Fig. 1 illustrates the connection (or correlation) between an individual's level of financial concern and their self-identified political ideology. The pattern exhibited by the respondents' reports suggest that those reporting greater levels of financial concerns are generally reporting conservative views. These findings are consistent with the statistical analysis demonstrating a positive relationship between an individual's degree of fear regarding their financial situation and the degree of conservativeness within that individual.
 
+```{r}
+fit_1 <- lm(ideology ~ fin_worry_rev, data = proj_data)
+summary(fit_1)
+
+reg_table <- coef(summary(fit_1))
+colnames(reg_table) <- c("Estimate", "Std. Error", "t value", "p value")
+knitr::kable(reg_table, digits = 3)
+```
+Table 1 reports the results of a regression of ideological self-placement on financial worry. The coefficient on financial worry is 0.152, meaning that a one-unit increase in financial worry is associated with about a 0.15-point increase on the seven-point ideology scale, where higher values indicate greater conservatism. This relationship is statistically significant(p<0.001), suggesting that respondents who are more worried about their financial situation tend to identify as somewhat more conservative. At the same time, the model explains only a small share of the variation in ideology(R2=0.011), so the relationship appears to be real but modest in size.
