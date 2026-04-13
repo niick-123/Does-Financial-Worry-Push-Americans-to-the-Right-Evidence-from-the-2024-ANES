@@ -55,8 +55,8 @@ ggplot(plot_data, aes(x = fin_worry_rev, y = mean_ideology)) +
   ) +
   labs(
     title = "Average Ideology by Level of Financial Worry",
-    x = "Current financial worry",
-    y = "Average ideology (higher = more conservative)"
+    x = "Current Financial Worry",
+    y = "Average Ideology (Higher = More Conservative)"
   )
 ```
 
