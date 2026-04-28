@@ -64,11 +64,14 @@ The graph in Fig. 1 illustrates the connection (or correlation) between an indiv
 
 ```{r}
 fit_1 <- lm(ideology ~ fin_worry_rev, data = proj_data)
-summary(fit_1)
 
-reg_table <- coef(summary(fit_1))
-colnames(reg_table) <- c("Estimate", "Std. Error", "t value", "p value")
-knitr::kable(reg_table, digits = 3)
+reg_table <- fit_1 |>
+  summary() |>
+  coef()
+
+knitr::kable(reg_table, 
+             digits = 3,
+             col.names = c("Estimate", "Std. Error", "t value", "p value"))
 ```
 Table 1 reports the results of a regression of ideological self-placement on financial worry. The coefficient on financial worry is 0.152, meaning that a one-unit increase in financial worry is associated with about a 0.15-point increase on the seven-point ideology scale, where higher values indicate greater conservatism. This relationship is statistically significant(p<0.001), suggesting that respondents who are more worried about their financial situation tend to identify as somewhat more conservative. At the same time, the model explains only a small share of the variation in ideology(R2=0.011), so the relationship appears to be real but modest in size.
 
