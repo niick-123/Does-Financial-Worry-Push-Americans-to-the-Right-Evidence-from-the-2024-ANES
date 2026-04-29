@@ -90,7 +90,7 @@ reg_table <- fit_1 |>
 knitr::kable(reg_table, 
              digits = 3,
              col.names = c("Estimate", "Std. Error", "t value", "p value"),
-             caption = "Table 1. Regression of ideology on financial worry")
+             caption = "Regression of ideology on financial worry")
 ```
 The value for the financial worry variable (coefficient) is 0.152; therefore, a one-unit increase in financial worry is associated with approximately a 0.15-point increase in a respondent's identification on the seven point ideology measure. That being said, those individuals with higher levels of financial concern will have slightly increased likelihood of identifying themselves as slightly more conservative.
 
@@ -123,7 +123,7 @@ knitr::kable(
   robust_table,
   digits = 3,
   col.names = c("Estimate", "Std. Error", "t value", "p value"),
-  caption = "Table 2. Regression including an additional measure of financial decline"
+  caption = "Regression including an additional measure of financial decline"
 )
 ```
 The idea behind using the above as a check for robustness was to estimate another model which included two additional variables; (1) how much worry a respondent has about money now and (2), whether they are currently financially better/worse off than last year. The results indicate that in addition to an initial positive relationship between current worry and liberal/conservative attitudes, there also appears to be a negative relationship. Furthermore, it would appear that the previously identified positive association does not entirely hold when looking at the impact of experiencing economic instability over time (i.e., being worse off now than you were one year ago).
