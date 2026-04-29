@@ -48,12 +48,13 @@ The dependent variable of interest is the respondents' reported ideological self
 
 ```{r}
 ggplot(proj_data, aes(x = factor(ideology))) +
-  geom_bar() +
+  geom_bar(fill = "steelblue") +
   labs(
     x = "Ideology (1 = Extremely liberal, 7 = Extremely conservative)",
     y = "Number of respondents",
     title = "Figure 1, Number of Respondents by Ideology Level"
-  )
+  ) +
+  theme_minimal()
 ```
 Figure 1 shows the distribution of the dependent variable, ideological self-placement.
 
@@ -71,12 +72,16 @@ ggplot(plot_data,aes(
       )
     ),
     y = mean_ideology)) +
-  geom_col() +
+  geom_col(fill = "steelblue") +
+  geom_errorbar(aes(ymin = mean_ideology - se/sqrt(n),
+                    ymax = mean_ideology + se/sqrt(n)),
+                    width = 0.2) +
   labs(
     title = "Figure 2. Average Ideology by Level of Financial Worry",
     x = "Current Financial Worry",
     y = "Average Ideology (Higher = More Conservative)"
-  )
+  ) +
+  theme_minimal()
 ```
 Figure 2 shows the relationship between financial worry and ideological self-placement. Respondents who report higher levels of financial worry also report slightly more conservative ideological positions on average. The pattern is gradual rather than dramatic, but its direction is consistent with the hypothesis that economic insecurity is positively associated with conservative ideology.
 
@@ -126,8 +131,10 @@ knitr::kable(
   caption = "Regression including an additional measure of financial decline"
 )
 ```
-The idea behind using the above as a check for robustness was to estimate another model which included two additional variables; (1) how much worry a respondent has about money now and (2), whether they are currently financially better/worse off than last year. The results indicate that in addition to an initial positive relationship between current worry and liberal/conservative attitudes, there also appears to be a negative relationship. Furthermore, it would appear that the previously identified positive association does not entirely hold when looking at the impact of experiencing economic instability over time (i.e., being worse off now than you were one year ago).
+As a robustness check, I added a second predictor (V241451) measuring whether respondents report being financially better or worse off than they were a year ago. This lets me separate two distinct components of economic insecurity: present-tense worry and perceived retrospective decline. The results in Table 2 substantially change the interpretation. The coefficient on retrospective financial decline is large and highly significant (b = 0.479, p < 0.001) — respondents who report being worse off than last year place themselves notably further to the right. More strikingly, once decline is held constant, the coefficient on current financial worry flips sign (b = −0.056, p = 0.02). In other words, the positive bivariate association in Table 1 appears to have been driven largely by retrospective decline rather than by present worry itself. Among respondents whose financial situation has been stable, those reporting more current worry are, if anything, slightly more liberal. This pattern weakens the original hypothesis as stated and points toward a more specific claim: it is the direction of change in financial circumstances, not the level of worry, that tracks conservative ideology in this data.
 
 Conclusion:
 
-  In general, the results from the primary analysis indicate there was an overall correlation between financial worry and conservative ideological positioning; however, the secondary analysis indicates that the relationship can vary based on which measure(s) of economic insecurity were used. Therefore, I would say the evidence for my hypothesis is not conclusive or clear-cut. As one example, it could be that current financial worry and financial decline as perceived by the individual represent different aspects of economic insecurity, therefore when they are combined into a single model (i.e., analyzed at the same time), each has a somewhat less direct influence on political ideology.
+  The results provide qualified, partial support for the hypothesis. In the simple bivariate regression, financial worry is positively and significantly associated with conservative self-placement, consistent with economic-threat theories of ideology. However, once I control for perceived retrospective financial decline, the relationship between current worry and conservatism reverses sign, and decline itself emerges as the substantively important predictor. This suggests that the original hypothesis — framed in terms of "financial worry" generally — conflates two distinct constructs that have opposite associations with ideology once disentangled.
+  Several limitations qualify these conclusions. First, the design is cross-sectional and observational, so I cannot rule out confounding from variables I did not include — education, age, income, race, region, and prior partisan attachment all plausibly influence both economic perceptions and ideological self-placement. Second, both key variables are self-reported, which raises the possibility of reverse causation: a respondent's existing political identity may shape how they characterize their own financial situation, particularly under a presidential administration they support or oppose. Third, ideology is collapsed onto a single 7-point left-right scale, which obscures the multidimensional nature of political belief (e.g., someone economically left and socially right). Fourth, ANES respondents are not a perfectly representative slice of the population, and item non-response may not be random with respect to either variable.
+  The analysis could be improved in several ways. Panel data following the same respondents across years would allow within-person fixed-effects models that absorb time-invariant confounders like personality and upbringing. Objective economic measures — actual income changes, unemployment spells, or county-level economic shocks linked to respondents — would reduce reliance on subjective self-reports and the reverse-causation concern they create. A natural experiment, such as a localized plant closure or a recession shock, would more credibly isolate the effect of economic insecurity on ideology. Finally, replacing the single ideology scale with separate measures of economic and social ideology would test whether financial insecurity moves these dimensions differently — a distinction that the current analysis cannot detect.
