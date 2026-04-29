@@ -1,5 +1,5 @@
 ---
-title: "PS270 Final Project"
+title: "Does Financial Worry Push Americans to the Right? Evidence from the 2024 ANES"
 author: Shuzhi Liu
 description: "My final project"
 output:
