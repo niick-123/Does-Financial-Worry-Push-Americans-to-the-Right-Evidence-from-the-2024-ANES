@@ -53,8 +53,7 @@ ggplot(proj_data, aes(x = factor(ideology))) +
     x = "Ideology (1 = Extremely liberal, 7 = Extremely conservative)",
     y = "Number of respondents",
     title = "Figure 1, Number of Respondents by Ideology Level"
-  ) +
-  theme_minimal()
+  )
 ```
 Figure 1 shows the distribution of the dependent variable, ideological self-placement.
 
@@ -80,8 +79,7 @@ ggplot(plot_data,aes(
     title = "Figure 2. Average Ideology by Level of Financial Worry",
     x = "Current Financial Worry",
     y = "Average Ideology (Higher = More Conservative)"
-  ) +
-  theme_minimal()
+  )
 ```
 Figure 2 shows the relationship between financial worry and ideological self-placement. Respondents who report higher levels of financial worry also report slightly more conservative ideological positions on average. The pattern is gradual rather than dramatic, but its direction is consistent with the hypothesis that economic insecurity is positively associated with conservative ideology.
 
