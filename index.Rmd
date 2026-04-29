@@ -115,19 +115,14 @@ robust_data <- anes |>
 
 fit_2 <- lm(ideology ~ fin_worry_rev + fin_change, data = robust_data)
 
-robust_table <- as.data.frame(coef(summary(fit_2)))
-robust_table$p_value <- ifelse(
-  robust_table$`Pr(>|t|)` < 0.001,
-  "<0.001",
-  sprintf("%.3f", robust_table$`Pr(>|t|)`)
-)
-
-robust_table <- robust_table[, c("Estimate", "Std. Error", "t value", "p_value")]
-colnames(robust_table) <- c("Estimate", "Std. Error", "t value", "p value")
+robust_table <- fit_2 |>
+  summary() |>
+  coef()
 
 knitr::kable(
   robust_table,
   digits = 3,
+  col.names = c("Estimate", "Std. Error", "t value", "p value"),
   caption = "Table 2. Regression including an additional measure of financial decline"
 )
 ```
