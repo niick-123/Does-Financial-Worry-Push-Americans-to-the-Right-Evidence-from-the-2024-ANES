@@ -16,10 +16,10 @@ Introduction:
   Economic uncertainty has long been believed to affect how people think about politics; however, there is no evidence to confirm whether financial uncertainty causes individuals to shift their views from left to right. The purpose of my research is to determine if increased financial concern affects where an individual places themselves ideologically on a left-right continuum in relation to other U.S. citizens. The reason why this research is so important is due to the fact that many people have experienced financial struggles at some point in time. Therefore, if those who have felt financially vulnerable are consistently placing themselves on the right end of the left/right continuum, then we can possibly understand why people act in certain ways politically and vote for specific candidates.
   My hypothesis is that individuals with greater financial concerns will be placed further to the right of the left-right continuum. One way to explain the relationship between economic fear (financial insecurity) and conservatism is by referring to economic fear/ threat response theories. According to these theories, when someone feels economically insecure they want to maintain order, stability and familiarity within the society. These traits are typically attributed to conservatives. Therefore, if my thesis is correct, individuals who report higher levels of financial concern should place themselves closer to the right end of the left/right continuum than others.
 
-```{r}
+```{r echo = FALSE}
 library(tidyverse)
 ```
-```{r}
+```{r echo = FALSE}
 anes <- read.csv("data/anes_timeseries_2024_csv_20250808.csv")
 
 proj_data <- anes |>
@@ -46,7 +46,7 @@ plot_data <- proj_data |>
 I will draw on the results of the 2024 American National Election Studies (ANES) Time Series Study. This is a national survey that focuses on adult residents of the United States regarding their political beliefs, political ideologies, and demographic factors. The ANES 2024 study employed a mixed mode format and included multiple sample types; however, in this analysis I am utilizing pre-election survey responses in a cross-sectionally designed observational framework. In other words, I am looking at responses by individual respondents who contribute one response each to the data set; thus, there are no experimental designs or panel changes used in collecting this data.
 The dependent variable of interest is the respondents' reported ideological self placement. Ideological self-identification was assessed via "V241177," a 7 point scale measuring from 1 = extremely liberal to 7 = extremely conservative. I excluded respondents whose reports were invalid or not substantive. The primary independent variable of concern is whether respondents currently experience worry over their finances. Financial worry is being assessed through "V241539," where respondents reported how worried they were with their current financial situation, and possible responses ranged from extremely worried to not at all worried. Therefore, I have reversed "V241539" so that greater values represent more worry over financial situations. Evidence supporting the hypothesis would be evidence of a statistically significant positive association between financial worry and ideology. This means that if respondents reported having increased financial worries, then it could be expected that such respondents also would place themselves further right on the 7 point ideological self identification scale. A lack of association between these two variables or a negative association would suggest either a weakening or rejection of the hypothesis.
 
-```{r}
+```{r echo = FALSE}
 ggplot(proj_data, aes(x = factor(ideology))) +
   geom_bar(fill = "steelblue") +
   labs(
@@ -57,7 +57,7 @@ ggplot(proj_data, aes(x = factor(ideology))) +
 ```
 Figure 1 shows the distribution of the dependent variable, ideological self-placement.
 
-```{r}
+```{r echo = FALSE}
 ggplot(plot_data,aes(
   x = factor(
       fin_worry_rev,
@@ -83,7 +83,7 @@ ggplot(plot_data,aes(
 ```
 Figure 2 shows the relationship between financial worry and ideological self-placement. Respondents who report higher levels of financial worry also report slightly more conservative ideological positions on average. The pattern is gradual rather than dramatic, but its direction is consistent with the hypothesis that economic insecurity is positively associated with conservative ideology.
 
-```{r}
+```{r echo = FALSE}
 fit_1 <- lm(ideology ~ fin_worry_rev, data = proj_data)
 
 reg_table <- fit_1 |>
@@ -101,7 +101,7 @@ As indicated by p < 0.001, the relationship is statistically significant suggest
 
 Due to the nature of the study using a cross-sectional observational research design, I am unable to use this coefficient to imply a causal relationship between financial worry and ideology. There could be omitted variables such as educational attainment, age, income, and/or prior partisan affiliation that cause both financial worry and ideology. Alternatively, there could be some type of circular relationship where an individual's political beliefs affect their interpretation of their own economic status.
 
-```{r}
+```{r echo = FALSE}
 robust_data <- anes |>
   select(V241177, V241539, V241451) |>
   mutate(
@@ -136,3 +136,7 @@ Conclusion:
   The results provide qualified, partial support for the hypothesis. In the simple bivariate regression, financial worry is positively and significantly associated with conservative self-placement, consistent with economic-threat theories of ideology. However, once I control for perceived retrospective financial decline, the relationship between current worry and conservatism reverses sign, and decline itself emerges as the substantively important predictor. This suggests that the original hypothesis — framed in terms of "financial worry" generally — conflates two distinct constructs that have opposite associations with ideology once disentangled.
   Several limitations qualify these conclusions. First, the design is cross-sectional and observational, so I cannot rule out confounding from variables I did not include — education, age, income, race, region, and prior partisan attachment all plausibly influence both economic perceptions and ideological self-placement. Second, both key variables are self-reported, which raises the possibility of reverse causation: a respondent's existing political identity may shape how they characterize their own financial situation, particularly under a presidential administration they support or oppose. Third, ideology is collapsed onto a single 7-point left-right scale, which obscures the multidimensional nature of political belief (e.g., someone economically left and socially right). Fourth, ANES respondents are not a perfectly representative slice of the population, and item non-response may not be random with respect to either variable.
   The analysis could be improved in several ways. Panel data following the same respondents across years would allow within-person fixed-effects models that absorb time-invariant confounders like personality and upbringing. Objective economic measures — actual income changes, unemployment spells, or county-level economic shocks linked to respondents — would reduce reliance on subjective self-reports and the reverse-causation concern they create. A natural experiment, such as a localized plant closure or a recession shock, would more credibly isolate the effect of economic insecurity on ideology. Finally, replacing the single ideology scale with separate measures of economic and social ideology would test whether financial insecurity moves these dimensions differently — a distinction that the current analysis cannot detect.
+  
+```{r print-code, ref.label=knitr::all_labels(), echo = TRUE, eval=FALSE}
+
+```
