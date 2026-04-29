@@ -116,7 +116,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["2024_spss.zip","data/anes_timeseries_2024_csv_20250808.csv","data/anes_timeseries_2024_csv_20250808.zip","data/anes_timeseries_2024_userguidecodebook_20250808.pdf","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["2024_spss.zip","data/anes_timeseries_2024_csv_20250808.csv","data/anes_timeseries_2024_csv_20250808.zip","data/anes_timeseries_2024_userguidecodebook_20250808.pdf","index_files/anchor-4.2.2/anchor.min.js","index_files/bowser-1.9.3/bowser.min.js","index_files/distill-2.2.21/template.v2.js","index_files/figure-html5/unnamed-chunk-2-1.png","index_files/figure-html5/unnamed-chunk-3-1.png","index_files/figure-html5/unnamed-chunk-4-1.png","index_files/header-attrs-2.17/header-attrs.js","index_files/header-attrs-2.30/header-attrs.js","index_files/jquery-3.6.0/jquery-3.6.0.js","index_files/jquery-3.6.0/jquery-3.6.0.min.js","index_files/jquery-3.6.0/jquery-3.6.0.min.map","index_files/popper-2.6.0/popper.min.js","index_files/tippy-6.2.7/tippy-bundle.umd.min.js","index_files/tippy-6.2.7/tippy-light-border.css","index_files/tippy-6.2.7/tippy.css","index_files/tippy-6.2.7/tippy.umd.min.js","index_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1545,7 +1545,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h2 id="project-thoughts">Project thoughts</h2>
-<p>The data source I used to complete my Final Project is the American National Election Study (ANES) – a long-running project that conducts in-depth surveys on voting behavior, public opinion, and political participation in the United States. My research question is: Is economic insecurity an indicator of the likelihood of being identified as conservative ideologically in the United States? Based upon economic anxiety and threat response theory I hypothesize that those who report experiencing, or believe they are experiencing economic insecurity, will have a greater tendency to identify themselves as conservative ideologically. A possible behavioral cause for this may be that economic uncertainty leads to a preference for social order, stability and traditional institutions; all characteristics typically associated with conservative ideologies. My key independent variable is economic insecurity which was measured through survey questions such as respondents’ reported level of satisfaction regarding their finances or whether or not respondents believed that the nation’s economic situation is improving or deteriorating. This allows for variation across each respondent thereby permitting regression analysis. My dependent variable is respondents’ ideological self-identification which is measured by respondents’ placement on the GSS liberal-conservative scale (which generally ranges from extremely liberal to extremely conservative). If support for my hypothesis is found in a regression model where high levels of economic insecurity are related to high (i.e. more conservative) placements on the ideology scale, then this will confirm my hypothesis. Conversely, if there is a significant relationship between economic insecurity and liberal ideological identity or if there is no statistically significant relationship between economic insecurity and ideological identity — either liberal or conservative — then this will disconfirm my hypothesis.</p>
+<p>Introduction:</p>
+<p>Economic uncertainty has long been believed to affect how people think about politics; however, there is no evidence to confirm whether financial uncertainty causes individuals to shift their views from left to right. The purpose of my research is to determine if increased financial concern affects where an individual places themselves ideologically on a left-right continuum in relation to other U.S. citizens. The reason why this research is so important is due to the fact that many people have experienced financial struggles at some point in time. Therefore, if those who have felt financially vulnerable are consistently placing themselves on the right end of the left/right continuum, then we can possibly understand why people act in certain ways politically and vote for specific candidates.
+My hypothesis is that individuals with greater financial concerns will be placed further to the right of the left-right continuum. One way to explain the relationship between economic fear (financial insecurity) and conservatism is by referring to economic fear/ threat response theories. According to these theories, when someone feels economically insecure they want to maintain order, stability and familiarity within the society. These traits are typically attributed to conservatives. Therefore, if my thesis is correct, individuals who report higher levels of financial concern should place themselves closer to the right end of the left/right continuum than others.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span></code></pre>
@@ -1573,30 +1575,49 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span>    mean_ideology <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>ideology</span><span class='op'>)</span>,</span>
 <span>    se <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/sd.html'>sd</a></span><span class='op'>(</span><span class='va'>ideology</span><span class='op'>)</span>,</span>
 <span>    n <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span></span>
-<span>  <span class='op'>)</span></span>
-<span></span>
-<span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>plot_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>fin_worry_rev</span>, y <span class='op'>=</span> <span class='va'>mean_ideology</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span><span class='op'>(</span></span>
-<span>    breaks <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,</span>
-<span>    labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
-<span>      <span class='st'>"Not at all worried"</span>,</span>
-<span>      <span class='st'>"A little worried"</span>,</span>
-<span>      <span class='st'>"Moderately worried"</span>,</span>
-<span>      <span class='st'>"Very worried"</span>,</span>
-<span>      <span class='st'>"Extremely worried"</span></span>
-<span>    <span class='op'>)</span></span>
-<span>  <span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>I will draw on the results of the 2024 American National Election Studies (ANES) Time Series Study. This is a national survey that focuses on adult residents of the United States regarding their political beliefs, political ideologies, and demographic factors. The ANES 2024 study employed a mixed mode format and included multiple sample types; however, in this analysis I am utilizing pre-election survey responses in a cross-sectionally designed observational framework. In other words, I am looking at responses by individual respondents who contribute one response each to the data set; thus, there are no experimental designs or panel changes used in collecting this data.
+The dependent variable of interest is the respondents’ reported ideological self placement. Ideological self-identification was assessed via “V241177,” a 7 point scale measuring from 1 = extremely liberal to 7 = extremely conservative. I excluded respondents whose reports were invalid or not substantive. The primary independent variable of concern is whether respondents currently experience worry over their finances. Financial worry is being assessed through “V241539,” where respondents reported how worried they were with their current financial situation, and possible responses ranged from extremely worried to not at all worried. Therefore, I have reversed “V241539” so that greater values represent more worry over financial situations. Evidence supporting the hypothesis would be evidence of a statistically significant positive association between financial worry and ideology. This means that if respondents reported having increased financial worries, then it could be expected that such respondents also would place themselves further right on the 7 point ideological self identification scale. A lack of association between these two variables or a negative association would suggest either a weakening or rejection of the hypothesis.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>proj_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>ideology</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
-<span>    title <span class='op'>=</span> <span class='st'>"Average Ideology by Level of Financial Worry"</span>,</span>
+<span>    x <span class='op'>=</span> <span class='st'>"Ideology (1 = Extremely liberal, 7 = Extremely conservative)"</span>,</span>
+<span>    y <span class='op'>=</span> <span class='st'>"Number of respondents"</span>,</span>
+<span>    title <span class='op'>=</span> <span class='st'>"Figure 1, Number of Respondents by Ideology Level"</span></span>
+<span>  <span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" alt="" width="624" /></p>
+</div>
+<p>Figure 1 shows the distribution of the dependent variable, ideological self-placement.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span><span class='va'>plot_data</span>,<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span></span>
+<span>  x <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span></span>
+<span>      <span class='va'>fin_worry_rev</span>,</span>
+<span>      levels <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>5</span>,</span>
+<span>      labels <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span></span>
+<span>        <span class='st'>"Not at all worried"</span>,</span>
+<span>        <span class='st'>"A little worried"</span>,</span>
+<span>        <span class='st'>"Moderately worried"</span>,</span>
+<span>        <span class='st'>"Very worried"</span>,</span>
+<span>        <span class='st'>"Extremely worried"</span></span>
+<span>      <span class='op'>)</span></span>
+<span>    <span class='op'>)</span>,</span>
+<span>    y <span class='op'>=</span> <span class='va'>mean_ideology</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span></span>
+<span>    title <span class='op'>=</span> <span class='st'>"Figure 2. Average Ideology by Level of Financial Worry"</span>,</span>
 <span>    x <span class='op'>=</span> <span class='st'>"Current Financial Worry"</span>,</span>
 <span>    y <span class='op'>=</span> <span class='st'>"Average Ideology (Higher = More Conservative)"</span></span>
 <span>  <span class='op'>)</span></span></code></pre>
 </div>
-<p><img src="index_files/figure-html5/unnamed-chunk-2-1.png" alt="" width="624" /></p>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" alt="" width="624" /></p>
 </div>
-<p>The graph in Fig. 1 illustrates the connection (or correlation) between an individual’s level of financial concern and their self-identified political ideology. The pattern exhibited by the respondents’ reports suggest that those reporting greater levels of financial concerns are generally reporting conservative views. These findings are consistent with the statistical analysis demonstrating a positive relationship between an individual’s degree of fear regarding their financial situation and the degree of conservativeness within that individual.</p>
+<p>Figure 2 shows the relationship between financial worry and ideological self-placement. Respondents who report higher levels of financial worry also report slightly more conservative ideological positions on average. The pattern is gradual rather than dramatic, but its direction is consistent with the hypothesis that economic insecurity is positively associated with conservative ideology.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>fit_1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>ideology</span> <span class='op'>~</span> <span class='va'>fin_worry_rev</span>, data <span class='op'>=</span> <span class='va'>proj_data</span><span class='op'>)</span></span>
@@ -1607,9 +1628,11 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span></span>
 <span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span><span class='va'>reg_table</span>, </span>
 <span>             digits <span class='op'>=</span> <span class='fl'>3</span>,</span>
-<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Estimate"</span>, <span class='st'>"Std. Error"</span>, <span class='st'>"t value"</span>, <span class='st'>"p value"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>             col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Estimate"</span>, <span class='st'>"Std. Error"</span>, <span class='st'>"t value"</span>, <span class='st'>"p value"</span><span class='op'>)</span>,</span>
+<span>             caption <span class='op'>=</span> <span class='st'>"Regression of ideology on financial worry"</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
+<caption><span id="tab:unnamed-chunk-5">Table 1: </span>Regression of ideology on financial worry</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -1637,8 +1660,77 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tbody>
 </table>
 </div>
-<p>Table 1 reports the results of a regression of ideological self-placement on financial worry. The coefficient on financial worry is 0.152, meaning that a one-unit increase in financial worry is associated with about a 0.15-point increase on the seven-point ideology scale, where higher values indicate greater conservatism. This relationship is statistically significant(p&lt;0.001), suggesting that respondents who are more worried about their financial situation tend to identify as somewhat more conservative. At the same time, the model explains only a small share of the variation in ideology(R2=0.011), so the relationship appears to be real but modest in size.</p>
-<p>Overall, both the visualization and the regression suggest that financial worry is positively associated with conservative ideological self-placement in the 2024 ANES data.</p>
+<p>The value for the financial worry variable (coefficient) is 0.152; therefore, a one-unit increase in financial worry is associated with approximately a 0.15-point increase in a respondent’s identification on the seven point ideology measure. That being said, those individuals with higher levels of financial concern will have slightly increased likelihood of identifying themselves as slightly more conservative.</p>
+<p>As indicated by p &lt; 0.001, the relationship is statistically significant suggesting that the relationship observed here likely has nothing to do with chance in this data set. However, at the same time, the relationship between financial worry and ideology has a relatively small substantive size. Therefore, while financial worry does appear to be important, it is clear that there are many other factors contributing to a person’s ideological placement.</p>
+<p>Due to the nature of the study using a cross-sectional observational research design, I am unable to use this coefficient to imply a causal relationship between financial worry and ideology. There could be omitted variables such as educational attainment, age, income, and/or prior partisan affiliation that cause both financial worry and ideology. Alternatively, there could be some type of circular relationship where an individual’s political beliefs affect their interpretation of their own economic status.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>robust_data</span> <span class='op'>&lt;-</span> <span class='va'>anes</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='va'>V241177</span>, <span class='va'>V241539</span>, <span class='va'>V241451</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span></span>
+<span>    ideology <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>V241177</span><span class='op'>)</span>,</span>
+<span>    fin_worry <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>V241539</span><span class='op'>)</span>,</span>
+<span>    fin_worry_rev <span class='op'>=</span> <span class='fl'>6</span> <span class='op'>-</span> <span class='va'>fin_worry</span>,</span>
+<span>    fin_change <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>V241451</span><span class='op'>)</span></span>
+<span>  <span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span></span>
+<span>    <span class='va'>ideology</span> <span class='op'>&gt;=</span> <span class='fl'>1</span> <span class='op'>&amp;</span> <span class='va'>ideology</span> <span class='op'>&lt;=</span> <span class='fl'>7</span>,</span>
+<span>    <span class='va'>fin_worry</span> <span class='op'>&gt;=</span> <span class='fl'>1</span> <span class='op'>&amp;</span> <span class='va'>fin_worry</span> <span class='op'>&lt;=</span> <span class='fl'>5</span>,</span>
+<span>    <span class='va'>fin_change</span> <span class='op'>&gt;=</span> <span class='fl'>1</span> <span class='op'>&amp;</span> <span class='va'>fin_change</span> <span class='op'>&lt;=</span> <span class='fl'>5</span></span>
+<span>  <span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>fit_2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>ideology</span> <span class='op'>~</span> <span class='va'>fin_worry_rev</span> <span class='op'>+</span> <span class='va'>fin_change</span>, data <span class='op'>=</span> <span class='va'>robust_data</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>robust_table</span> <span class='op'>&lt;-</span> <span class='va'>fit_2</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/r/stats/coef.html'>coef</a></span><span class='op'>(</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span></span>
+<span>  <span class='va'>robust_table</span>,</span>
+<span>  digits <span class='op'>=</span> <span class='fl'>3</span>,</span>
+<span>  col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Estimate"</span>, <span class='st'>"Std. Error"</span>, <span class='st'>"t value"</span>, <span class='st'>"p value"</span><span class='op'>)</span>,</span>
+<span>  caption <span class='op'>=</span> <span class='st'>"Regression including an additional measure of financial decline"</span></span>
+<span><span class='op'>)</span></span></code></pre>
+</div>
+<table>
+<caption><span id="tab:unnamed-chunk-6">Table 2: </span>Regression including an additional measure of financial decline</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Std. Error</th>
+<th style="text-align: right;">t value</th>
+<th style="text-align: right;">p value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">(Intercept)</td>
+<td style="text-align: right;">2.739</td>
+<td style="text-align: right;">0.077</td>
+<td style="text-align: right;">35.487</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">fin_worry_rev</td>
+<td style="text-align: right;">-0.056</td>
+<td style="text-align: right;">0.024</td>
+<td style="text-align: right;">-2.320</td>
+<td style="text-align: right;">0.02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">fin_change</td>
+<td style="text-align: right;">0.479</td>
+<td style="text-align: right;">0.026</td>
+<td style="text-align: right;">18.569</td>
+<td style="text-align: right;">0.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The idea behind using the above as a check for robustness was to estimate another model which included two additional variables; (1) how much worry a respondent has about money now and (2), whether they are currently financially better/worse off than last year. The results indicate that in addition to an initial positive relationship between current worry and liberal/conservative attitudes, there also appears to be a negative relationship. Furthermore, it would appear that the previously identified positive association does not entirely hold when looking at the impact of experiencing economic instability over time (i.e., being worse off now than you were one year ago).</p>
+<p>Conclusion:</p>
+<p>In general, the results from the primary analysis indicate there was an overall correlation between financial worry and conservative ideological positioning; however, the secondary analysis indicates that the relationship can vary based on which measure(s) of economic insecurity were used. Therefore, I would say the evidence for my hypothesis is not conclusive or clear-cut. As one example, it could be that current financial worry and financial decline as perceived by the individual represent different aspects of economic insecurity, therefore when they are combined into a single model (i.e., analyzed at the same time), each has a somewhat less direct influence on political ideology.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
